@@ -1,4 +1,4 @@
-module github.com/Kolterdyx/rt-goNEAT/v1
+module github.com/Kolterdyx/rt-goNEAT
 
 go 1.25.0
 
@@ -13,6 +13,5 @@ require (
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/stretchr/objx v0.5.0 // indirect
 	golang.org/x/exp v0.0.0-20260603202125-055de637280b // indirect
 )

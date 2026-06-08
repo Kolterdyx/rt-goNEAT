@@ -178,7 +178,7 @@ New hidden neurons added by `mutate_add_node` are assigned a random activation f
 **In code:**
 
 ```go
-import neatmath "github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+import neatmath "github.com/Kolterdyx/rt-goNEAT/neat/math"
 
 opts.NodeActivators = []neatmath.NodeActivationType{
     neatmath.SigmoidSteepenedActivation,

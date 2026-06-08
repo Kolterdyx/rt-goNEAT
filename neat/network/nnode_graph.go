@@ -2,7 +2,7 @@ package network
 
 import (
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/neat/math"
 	"gonum.org/v1/gonum/graph/encoding"
 )
 

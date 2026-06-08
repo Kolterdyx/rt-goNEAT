@@ -1,7 +1,7 @@
 package genetics
 
 import (
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
+	"github.com/Kolterdyx/rt-goNEAT/neat"
 	"math"
 )
 

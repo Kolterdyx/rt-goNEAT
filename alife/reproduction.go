@@ -1,7 +1,7 @@
 package alife
 
 import (
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
+	"github.com/Kolterdyx/rt-goNEAT/neat/genetics"
 )
 
 // ReproduceAsexual creates a new organism by cloning and mutating parent.

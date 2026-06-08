@@ -3,7 +3,7 @@
 A `Genome` encodes the complete blueprint of an organism's neural network. It contains a list of nodes (neurons), a list of genes (connections), and a list of traits (evolvable parameters).
 
 ```go
-import "github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
+import "github.com/Kolterdyx/rt-goNEAT/neat/genetics"
 ```
 
 ---
@@ -260,10 +260,10 @@ If you want NEAT to discover which inputs are relevant, use `xordisconnectedstar
 
 ```go
 import (
-    "github.com/Kolterdyx/rt-goNEAT/v1/neat"
-    "github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
-    "github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
-    neatmath "github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+    "github.com/Kolterdyx/rt-goNEAT/neat"
+    "github.com/Kolterdyx/rt-goNEAT/neat/genetics"
+    "github.com/Kolterdyx/rt-goNEAT/neat/network"
+    neatmath "github.com/Kolterdyx/rt-goNEAT/neat/math"
 )
 
 trait := &neat.Trait{Id: 1, Params: make([]float64, 8)}

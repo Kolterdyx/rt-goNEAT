@@ -3,7 +3,7 @@
 Each organism's genome describes a neural network topology. When you need the actual network to process inputs, call `org.Phenotype()` to get the `*network.Network`. The network is built lazily from the genome on first access and cached for the organism's lifetime.
 
 ```go
-import "github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
+import "github.com/Kolterdyx/rt-goNEAT/neat/network"
 ```
 
 ---

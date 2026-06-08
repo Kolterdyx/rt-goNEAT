@@ -2,7 +2,7 @@ package network
 
 import (
 	"encoding/json"
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/neat/math"
 	"io"
 )
 

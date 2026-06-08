@@ -18,11 +18,11 @@ rt-goNEAT is a real-time Artificial Life simulation library built on the NEAT (N
 ## Quick Reference
 
 ```
-github.com/Kolterdyx/rt-goNEAT/v1/alife        — simulation controller
-github.com/Kolterdyx/rt-goNEAT/v1/neat          — options, context
-github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics — genome, organism, species, population
-github.com/Kolterdyx/rt-goNEAT/v1/neat/network  — neural network phenotype
-github.com/Kolterdyx/rt-goNEAT/v1/neat/math     — activation functions
+github.com/Kolterdyx/rt-goNEAT/alife        — simulation controller
+github.com/Kolterdyx/rt-goNEAT/neat          — options, context
+github.com/Kolterdyx/rt-goNEAT/neat/genetics — genome, organism, species, population
+github.com/Kolterdyx/rt-goNEAT/neat/network  — neural network phenotype
+github.com/Kolterdyx/rt-goNEAT/neat/math     — activation functions
 ```
 
 ## What changed from the original goNEAT

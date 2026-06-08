@@ -5,8 +5,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
+	"github.com/Kolterdyx/rt-goNEAT/neat"
+	"github.com/Kolterdyx/rt-goNEAT/neat/genetics"
 )
 
 // Simulation is the top-level ALife controller. It wraps a genetics.Population and

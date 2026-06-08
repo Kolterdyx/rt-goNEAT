@@ -1,7 +1,7 @@
 package formats
 
 import (
-	"github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/neat/network"
 	"gonum.org/v1/gonum/graph/encoding/dot"
 	"io"
 )
