@@ -3,8 +3,8 @@ package genetics
 
 import (
 	"errors"
-	"github.com/yaricom/goNEAT/v4/neat"
-	"github.com/yaricom/goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
 	"strings"
 )
 

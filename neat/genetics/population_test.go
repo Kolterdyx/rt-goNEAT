@@ -1,10 +1,10 @@
 package genetics
 
 import (
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yaricom/goNEAT/v4/neat"
-	"github.com/yaricom/goNEAT/v4/neat/math"
 	"math/rand"
 	"strings"
 	"testing"
@@ -24,8 +24,8 @@ func TestNewPopulationRandom(t *testing.T) {
 	require.NoError(t, err, "failed to create population")
 	require.NotNil(t, pop, "population expected")
 	require.Len(t, pop.Organisms, conf.PopSize, "wrong population size")
-	assert.EqualValues(t, 11, pop.nextNodeId, "wrong next node ID")
-	assert.EqualValues(t, 101, pop.nextInnovNum, "wrong next innovation number")
+	assert.EqualValues(t, 11, pop.tracker.nextNodeId, "wrong next node ID")
+	assert.EqualValues(t, 101, pop.tracker.nextInnovNum, "wrong next innovation number")
 	assert.True(t, len(pop.Species) > 0, "population has no species")
 
 	for i, org := range pop.Organisms {
@@ -54,11 +54,11 @@ func TestNewPopulation(t *testing.T) {
 	require.Len(t, pop.Organisms, conf.PopSize, "wrong population size")
 	lastNodeId, err := gen.getLastNodeId()
 	require.NoError(t, err, "failed to get last node ID")
-	assert.Equal(t, int32(lastNodeId+1), pop.nextNodeId, "wrong next node ID")
+	assert.Equal(t, int32(lastNodeId+1), pop.tracker.nextNodeId, "wrong next node ID")
 
 	nextGeneInnovNum, err := gen.getNextGeneInnovNum()
 	require.NoError(t, err, "failed to get next gene innovation number")
-	assert.Equal(t, nextGeneInnovNum-1, pop.nextInnovNum, "wrong next innovation number in population")
+	assert.Equal(t, nextGeneInnovNum-1, pop.tracker.nextInnovNum, "wrong next innovation number in population")
 	require.Len(t, pop.Species, 1, "wrong species number")
 
 	for i, org := range pop.Organisms {

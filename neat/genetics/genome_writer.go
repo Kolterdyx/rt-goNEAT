@@ -3,9 +3,9 @@ package genetics
 import (
 	"bufio"
 	"fmt"
-	"github.com/yaricom/goNEAT/v4/neat"
-	"github.com/yaricom/goNEAT/v4/neat/math"
-	"github.com/yaricom/goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
 	"gopkg.in/yaml.v3"
 	"io"
 )

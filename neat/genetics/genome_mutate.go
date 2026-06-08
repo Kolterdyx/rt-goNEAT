@@ -2,10 +2,10 @@ package genetics
 
 import (
 	"fmt"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
 	"github.com/pkg/errors"
-	"github.com/yaricom/goNEAT/v4/neat"
-	"github.com/yaricom/goNEAT/v4/neat/math"
-	"github.com/yaricom/goNEAT/v4/neat/network"
 	"math/rand"
 )
 
@@ -15,8 +15,10 @@ import (
 // The reason this mutator is important is that if we can start NEAT with some inputs disconnected,
 // then we can allow NEAT to decide which inputs are important.
 // This process has two good effects:
-// 	(1) You can start minimally even in problems with many inputs and
-// 	(2) you don't need to know a priori what the important features of the domain are.
+//
+//	(1) You can start minimally even in problems with many inputs and
+//	(2) you don't need to know a priori what the important features of the domain are.
+//
 // If all sensors already connected than do nothing.
 func (g *Genome) mutateConnectSensors(innovations InnovationsObserver, _ *neat.Options) (bool, error) {
 
@@ -246,19 +248,9 @@ func (g *Genome) mutateAddLink(innovations InnovationsObserver, generation int, 
 		var gene *Gene
 		// Check to see if this innovation already occurred in the population
 		innovationFound := false
-		for _, inn := range innovations.Innovations() {
-			// match the innovation in the innovations list
-			if inn.innovationType == newLinkInnType &&
-				inn.InNodeId == node1.Id &&
-				inn.OutNodeId == node2.Id &&
-				inn.IsRecurrent == doRecur {
-
-				// Create new gene
-				gene = NewGeneWithTrait(g.Traits[inn.NewTraitNum], inn.NewWeight, node1, node2, doRecur, inn.InnovationNum, 0)
-
-				innovationFound = true
-				break
-			}
+		if inn := innovations.FindLinkInnovation(node1.Id, node2.Id, doRecur); inn != nil {
+			gene = NewGeneWithTrait(g.Traits[inn.NewTraitNum], inn.NewWeight, node1, node2, doRecur, inn.InnovationNum, 0)
+			innovationFound = true
 		}
 		// The innovation is totally novel
 		if !innovationFound {
@@ -364,32 +356,15 @@ func (g *Genome) mutateAddNode(innovations InnovationsObserver, nodeIdGenerator 
 
 	// Check to see if this innovation already occurred in the population
 	innovationFound := false
-	for _, inn := range innovations.Innovations() {
-		/* We check to see if an innovation already occurred that was:
-			-A new node
-			-Stuck between the same nodes as were chosen for this mutation
-			-Splitting the same gene as chosen for this mutation
-		If so, we know this mutation is not a novel innovation in this generation,
-		so we make it match the original, identical mutation which occurred
-		elsewhere in the population by coincidence */
-		if inn.innovationType == newNodeInnType &&
-			inn.InNodeId == inNode.Id &&
-			inn.OutNodeId == outNode.Id &&
-			inn.OldInnovNum == gene.InnovationNum {
-
-			// Create the new NNode
-			node = network.NewNNode(inn.NewNodeId, network.HiddenNeuron)
-			// By convention, it will point to the first trait
-			// Note: In future may want to change this
-			node.Trait = g.Traits[0]
-
-			// Create the new Genes
-			gene1 = NewGeneWithTrait(trait, 1.0, inNode, node, link.IsRecurrent, inn.InnovationNum, 0)
-			gene2 = NewGeneWithTrait(trait, oldWeight, node, outNode, false, inn.InnovationNum2, 0)
-
-			innovationFound = true
-			break
-		}
+	if inn := innovations.FindNodeInnovation(inNode.Id, outNode.Id, gene.InnovationNum); inn != nil {
+		// Create the new NNode
+		node = network.NewNNode(inn.NewNodeId, network.HiddenNeuron)
+		// By convention, it will point to the first trait
+		node.Trait = g.Traits[0]
+		// Create the new Genes
+		gene1 = NewGeneWithTrait(trait, 1.0, inNode, node, link.IsRecurrent, inn.InnovationNum, 0)
+		gene2 = NewGeneWithTrait(trait, oldWeight, node, outNode, false, inn.InnovationNum2, 0)
+		innovationFound = true
 	}
 	// The innovation is totally novel
 	if !innovationFound {

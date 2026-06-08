@@ -2,9 +2,9 @@ package neat
 
 import (
 	"errors"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yaricom/goNEAT/v4/neat/math"
 	"os"
 	"testing"
 )
@@ -93,8 +93,6 @@ func checkNeatOptions(nc *Options, t *testing.T) {
 	assert.Equal(t, 1.0, nc.ExcessCoeff)
 	assert.Equal(t, 0.4, nc.MutdiffCoeff)
 	assert.Equal(t, 3.0, nc.CompatThreshold)
-	assert.Equal(t, 1.0, nc.AgeSignificance)
-	assert.Equal(t, 0.2, nc.SurvivalThresh)
 	assert.Equal(t, 0.25, nc.MutateOnlyProb)
 	assert.Equal(t, 0.1, nc.MutateRandomTraitProb)
 	assert.Equal(t, 0.1, nc.MutateLinkTraitProb)
@@ -112,12 +110,6 @@ func checkNeatOptions(nc *Options, t *testing.T) {
 	assert.Equal(t, 0.2, nc.MateOnlyProb)
 	assert.Equal(t, 0.0, nc.RecurOnlyProb)
 	assert.Equal(t, 200, nc.PopSize)
-	assert.Equal(t, 50, nc.DropOffAge)
 	assert.Equal(t, 50, nc.NewLinkTries)
-	assert.Equal(t, 10, nc.PrintEvery)
-	assert.Equal(t, 0, nc.BabiesStolen)
-	assert.Equal(t, 100, nc.NumRuns)
-	assert.Equal(t, 100, nc.NumGenerations)
-	assert.Equal(t, EpochExecutorTypeSequential, nc.EpochExecutorType)
 	assert.Equal(t, GenomeCompatibilityMethodFast, nc.GenCompatMethod)
 }

@@ -1,49 +1,51 @@
 package genetics
 
-// InnovationsObserver the definition of component able to manage records of innovations
+// InnovationsObserver manages records of structural innovations shared across the population.
 type InnovationsObserver interface {
-	// StoreInnovation is to store specific innovation
+	// StoreInnovation records a new innovation.
 	StoreInnovation(innovation Innovation)
-	// Innovations is to get list of known innovations
+	// Innovations returns all recorded innovations as a slice.
 	Innovations() []Innovation
-	// NextInnovationNumber is to get next unique global innovation number
+	// NextInnovationNumber returns the next unique global innovation number.
 	NextInnovationNumber() int64
+	// FindLinkInnovation returns the recorded innovation for adding a link between
+	// inNodeId and outNodeId (recurrent or not), or nil if none exists.
+	FindLinkInnovation(inNodeId, outNodeId int, isRecurrent bool) *Innovation
+	// FindNodeInnovation returns the recorded innovation for splitting the gene with
+	// oldInnovNum between inNodeId and outNodeId, or nil if none exists.
+	FindNodeInnovation(inNodeId, outNodeId int, oldInnovNum int64) *Innovation
 }
 
-// Innovation serves as a way to record innovations specifically, so that an innovation in one genome can be
-// compared with other innovations in the same epoch, and if they are the same innovation, they can both be assigned the
-// same innovation number.
-//
-// This class can encode innovations that represent a new link forming, or a new node being added.  In each case, two
-// nodes fully specify the innovation and where it must have occurred (between them).
+// Innovation records a structural change in a genome so that the same change in different
+// genomes within the same simulation window can be assigned the same innovation number,
+// maintaining alignment for crossover.
 type Innovation struct {
-
-	// Two nodes specify where the innovation took place
+	// The two nodes between which the innovation occurred
 	InNodeId  int
 	OutNodeId int
-	// The number assigned to the innovation
+	// InnovationNum is the primary innovation number assigned to this change
 	InnovationNum int64
-	// If this is a new node innovation, then there are 2 innovations (links) added for the new node
+	// InnovationNum2 holds the second innovation number for node-split innovations (two new links)
 	InnovationNum2 int64
 
-	// If a link is added, this is its weight
+	// NewWeight is the weight assigned to a new link innovation
 	NewWeight float64
-	// If a link is added, this is its connected trait index
+	// NewTraitNum is the trait index for a new link innovation
 	NewTraitNum int
-	// If a new node was created, this is its node_id
+	// NewNodeId is the ID of the new node in a node-split innovation
 	NewNodeId int
 
-	// If a new node was created, this is the innovation number of the gene's link it is being stuck inside
+	// OldInnovNum is the innovation number of the gene that was split (node innovations only)
 	OldInnovNum int64
 
-	// Flag to indicate whether its innovation for recurrent link
+	// IsRecurrent flags a recurrent link innovation
 	IsRecurrent bool
 
-	// Either NEWNODE or NEWLINK
+	// innovationType distinguishes node-split from link-add innovations
 	innovationType innovationType
 }
 
-// NewInnovationForNode is a constructor for the new node case
+// NewInnovationForNode constructs an innovation record for inserting a new node.
 func NewInnovationForNode(nodeInId, nodeOutId int, innovationNum1, innovationNum2 int64, newNodeId int, oldInnovNum int64) *Innovation {
 	return &Innovation{
 		innovationType: newNodeInnType,
@@ -56,7 +58,7 @@ func NewInnovationForNode(nodeInId, nodeOutId int, innovationNum1, innovationNum
 	}
 }
 
-// NewInnovationForLink is a constructor for new link case
+// NewInnovationForLink constructs an innovation record for adding a new (non-recurrent) link.
 func NewInnovationForLink(nodeInId, nodeOutId int, innovationNum int64, weight float64, traitId int) *Innovation {
 	return &Innovation{
 		innovationType: newLinkInnType,
@@ -68,7 +70,7 @@ func NewInnovationForLink(nodeInId, nodeOutId int, innovationNum int64, weight f
 	}
 }
 
-// NewInnovationForRecurrentLink is a constructor for a recurrent link
+// NewInnovationForRecurrentLink constructs an innovation record for adding a (possibly recurrent) link.
 func NewInnovationForRecurrentLink(nodeInId, nodeOutId int, innovationNum int64, weight float64, traitId int, recur bool) *Innovation {
 	return &Innovation{
 		innovationType: newLinkInnType,

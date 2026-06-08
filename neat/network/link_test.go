@@ -1,8 +1,8 @@
 package network
 
 import (
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
 	"github.com/stretchr/testify/assert"
-	"github.com/yaricom/goNEAT/v4/neat"
 	"testing"
 )
 

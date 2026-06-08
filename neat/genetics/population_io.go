@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/yaricom/goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
 	"io"
 	"strconv"
 	"strings"
@@ -41,23 +41,23 @@ func ReadPopulation(ir io.Reader, options *neat.Options) (pop *Population, err e
 				return nil, err
 			}
 			// add new organism for read genome
-			if newOrganism, err := NewOrganism(0.0, newGenome, 1); err != nil {
+			if newOrganism, err := NewOrganism(newGenome, 1); err != nil {
 				return nil, err
 			} else {
 				pop.Organisms = append(pop.Organisms, newOrganism)
 			}
 
 			if lastNodeId, err := newGenome.getLastNodeId(); err == nil {
-				if pop.nextNodeId < int32(lastNodeId) {
-					pop.nextNodeId = int32(lastNodeId + 1)
+				if pop.tracker.nextNodeId < int32(lastNodeId) {
+					pop.tracker.nextNodeId = int32(lastNodeId + 1)
 				}
 			} else {
 				return nil, err
 			}
 
 			if lastGeneInnovNum, err := newGenome.getNextGeneInnovNum(); err == nil {
-				if pop.nextInnovNum < lastGeneInnovNum {
-					pop.nextInnovNum = lastGeneInnovNum
+				if pop.tracker.nextInnovNum < lastGeneInnovNum {
+					pop.tracker.nextInnovNum = lastGeneInnovNum
 				}
 			} else {
 				return nil, err

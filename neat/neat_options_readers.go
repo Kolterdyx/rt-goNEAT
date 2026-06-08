@@ -2,9 +2,9 @@ package neat
 
 import (
 	"fmt"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
-	"github.com/yaricom/goNEAT/v4/neat/math"
 	"gopkg.in/yaml.v3"
 	"io"
 	"os"
@@ -69,10 +69,8 @@ func LoadNeatOptions(r io.Reader) (*Options, error) {
 			c.MutdiffCoeff = cast.ToFloat64(param)
 		case "compat_threshold":
 			c.CompatThreshold = cast.ToFloat64(param)
-		case "age_significance":
-			c.AgeSignificance = cast.ToFloat64(param)
-		case "survival_thresh":
-			c.SurvivalThresh = cast.ToFloat64(param)
+		case "age_significance", "survival_thresh":
+			// epoch-based parameters — ignored in ALife mode
 		case "mutate_only_prob":
 			c.MutateOnlyProb = cast.ToFloat64(param)
 		case "mutate_random_trait_prob":
@@ -107,20 +105,10 @@ func LoadNeatOptions(r io.Reader) (*Options, error) {
 			c.RecurOnlyProb = cast.ToFloat64(param)
 		case "pop_size":
 			c.PopSize = cast.ToInt(param)
-		case "dropoff_age":
-			c.DropOffAge = cast.ToInt(param)
+		case "dropoff_age", "print_every", "babies_stolen", "num_runs", "num_generations", "epoch_executor":
+			// epoch-based parameters — ignored in ALife mode
 		case "newlink_tries":
 			c.NewLinkTries = cast.ToInt(param)
-		case "print_every":
-			c.PrintEvery = cast.ToInt(param)
-		case "babies_stolen":
-			c.BabiesStolen = cast.ToInt(param)
-		case "num_runs":
-			c.NumRuns = cast.ToInt(param)
-		case "num_generations":
-			c.NumGenerations = cast.ToInt(param)
-		case "epoch_executor":
-			c.EpochExecutorType = EpochExecutorType(param)
 		case "genome_compat_method":
 			c.GenCompatMethod = GenomeCompatibilityMethod(param)
 		case "log_level":

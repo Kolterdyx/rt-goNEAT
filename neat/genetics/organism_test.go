@@ -3,51 +3,49 @@ package genetics
 import (
 	"bytes"
 	"encoding/gob"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
-	"math"
 	"math/rand"
 	"sort"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
-// tests organisms sorting
-func TestOrganisms(t *testing.T) {
+// TestOrganisms_Sort verifies that Organisms sorts ascending by birth tick (Generation).
+func TestOrganisms_Sort(t *testing.T) {
 	gnome := buildTestGenome(1)
 	count := 100
 	orgs := make(Organisms, count)
 	var err error
 	for i := 0; i < count; i++ {
-		orgs[i], err = NewOrganism(rand.Float64(), gnome, 1)
+		orgs[i], err = NewOrganism(gnome, rand.Intn(1000))
 		require.NoError(t, err, "failed to create organism: %d", i)
 	}
 
 	// sort ascending
-	//
 	sort.Sort(orgs)
-	fit := 0.0
+	tick := -1
 	for _, o := range orgs {
-		assert.True(t, o.Fitness > fit, "Wrong ascending sort order")
-		fit = o.Fitness
+		assert.True(t, o.Generation >= tick, "wrong ascending sort order")
+		tick = o.Generation
 	}
 
 	// sort descending
-	//
 	for i := 0; i < count; i++ {
-		orgs[i], err = NewOrganism(rand.Float64(), gnome, 1)
+		orgs[i], err = NewOrganism(gnome, rand.Intn(1000))
 		require.NoError(t, err, "failed to create organism: %d", i)
 	}
 	sort.Sort(sort.Reverse(orgs))
-	fit = math.MaxFloat64
+	tick = 1<<31 - 1
 	for _, o := range orgs {
-		assert.True(t, o.Fitness < fit, "Wrong ascending sort order")
-		fit = o.Fitness
+		assert.True(t, o.Generation <= tick, "wrong descending sort order")
+		tick = o.Generation
 	}
 }
 
 func TestOrganism_Phenotype(t *testing.T) {
 	gnome := buildTestGenome(1)
-	organism, err := NewOrganism(rand.Float64(), gnome, 1)
+	organism, err := NewOrganism(gnome, 1)
 	require.NoError(t, err)
 
 	phenotype, err := organism.Phenotype()
@@ -65,7 +63,7 @@ func TestOrganism_Phenotype(t *testing.T) {
 
 func TestOrganism_MarshalBinary(t *testing.T) {
 	gnome := buildTestGenome(1)
-	org, err := NewOrganism(rand.Float64(), gnome, 1)
+	org, err := NewOrganism(gnome, 42)
 	require.NoError(t, err, "failed to create organism")
 
 	// Marshal to binary
@@ -80,8 +78,7 @@ func TestOrganism_MarshalBinary(t *testing.T) {
 	err = dec.Decode(&decOrg)
 	require.NoError(t, err, "failed to decode")
 
-	// check results
-	assert.Equal(t, org.Fitness, decOrg.Fitness)
+	assert.Equal(t, org.Generation, decOrg.Generation)
 
 	decGnome := decOrg.Genotype
 	assert.Equal(t, gnome.Id, decGnome.Id)
@@ -91,26 +88,19 @@ func TestOrganism_MarshalBinary(t *testing.T) {
 	assert.True(t, equals)
 }
 
-func TestOrganism_CheckChampionChildDamaged(t *testing.T) {
+func TestOrganism_IsAlive(t *testing.T) {
 	gnome := buildTestGenome(1)
-	org, err := NewOrganism(rand.Float64(), gnome, 1)
-	require.NoError(t, err, "failed to create organism")
+	org, err := NewOrganism(gnome, 1)
+	require.NoError(t, err)
+	assert.True(t, org.IsAlive())
 
-	org.isPopulationChampionChild = true
-	org.highestFitness = 100
-	org.Fitness = 1000
-
-	res := org.CheckChampionChildDamaged()
-	assert.False(t, res)
-
-	org.Fitness = 10
-	res = org.CheckChampionChildDamaged()
-	assert.True(t, res)
+	org.alive = false
+	assert.False(t, org.IsAlive())
 }
 
 func TestOrganism_UpdatePhenotype(t *testing.T) {
 	gnome := buildTestGenome(1)
-	org, err := NewOrganism(rand.Float64(), gnome, 1)
+	org, err := NewOrganism(gnome, 1)
 	require.NoError(t, err, "failed to create organism")
 
 	org.orgPhenotype = nil

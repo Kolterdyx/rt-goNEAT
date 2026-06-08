@@ -1,11 +1,11 @@
 package genetics
 
 import (
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yaricom/goNEAT/v4/neat"
-	"github.com/yaricom/goNEAT/v4/neat/math"
-	"github.com/yaricom/goNEAT/v4/neat/network"
 	"math/rand"
 	"testing"
 )
@@ -34,7 +34,7 @@ func TestGenome_mutateAddLink(t *testing.T) {
 	require.True(t, res, "New link not added")
 
 	// one gene was added innovNum = 3 + 1
-	assert.EqualValues(t, 4, pop.nextInnovNum, "wrong next innovation number of the population")
+	assert.EqualValues(t, 4, pop.tracker.nextInnovNum, "wrong next innovation number of the population")
 	assert.Len(t, pop.Innovations(), 1, "wrong number of innovations in population")
 	assert.Len(t, gnome1.Genes, 4, "No new gene was added")
 	gene := gnome1.Genes[3]
@@ -57,7 +57,7 @@ func TestGenome_mutateAddLink(t *testing.T) {
 	require.True(t, res, "New link not added")
 
 	// one gene was added innovNum = 4 + 1
-	assert.EqualValues(t, 5, pop.nextInnovNum, "wrong next innovation number of the population")
+	assert.EqualValues(t, 5, pop.tracker.nextInnovNum, "wrong next innovation number of the population")
 	assert.Len(t, pop.Innovations(), 2, "wrong number of innovations in population")
 	assert.Len(t, gnome1.Genes, 5, "No new gene was added")
 
@@ -103,7 +103,7 @@ func TestGenome_mutateConnectSensors(t *testing.T) {
 	assert.Len(t, gnome1.Genes, 4, "wrong number of genome genes")
 	assert.Len(t, pop.Innovations(), 1, "wrong number of innovations")
 	// one gene was added, expecting innovation + 1 (3+1)
-	assert.EqualValues(t, 4, pop.nextInnovNum, "wrong innovation in population")
+	assert.EqualValues(t, 4, pop.tracker.nextInnovNum, "wrong innovation in population")
 }
 
 func TestGenome_mutateAddNode(t *testing.T) {
@@ -128,7 +128,7 @@ func TestGenome_mutateAddNode(t *testing.T) {
 	require.True(t, res, "mutation failed")
 
 	// two genes was added, expecting innovation + 2 (3+2)
-	assert.EqualValues(t, 5, pop.nextInnovNum, "wrong next innovation number set for population")
+	assert.EqualValues(t, 5, pop.tracker.nextInnovNum, "wrong next innovation number set for population")
 	assert.Len(t, pop.Innovations(), 1, "wrong number of innovations")
 	assert.Len(t, gnome1.Genes, 5, "wrong number of genes")
 	require.Len(t, gnome1.Nodes, 5, "wrong number of nodes")
