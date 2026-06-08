@@ -5,13 +5,11 @@ import (
 	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"math/rand"
 	"strings"
 	"testing"
 )
 
 func TestNewPopulationRandom(t *testing.T) {
-	rand.Seed(42)
 	in, out, maxHidden := 3, 2, 5
 	linkProb := 0.5
 	conf := neat.Options{
@@ -36,7 +34,6 @@ func TestNewPopulationRandom(t *testing.T) {
 }
 
 func TestNewPopulation(t *testing.T) {
-	rand.Seed(42)
 	in, out, nmax, n := 3, 2, 5, 3
 	linkProb := 0.5
 	conf := &neat.Options{
