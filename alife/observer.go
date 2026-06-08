@@ -4,7 +4,7 @@
 package alife
 
 import (
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/genetics"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
 )
 
 // Observer receives lifecycle events from a Simulation.

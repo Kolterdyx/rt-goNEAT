@@ -2,9 +2,9 @@ package genetics
 
 import (
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
 	"github.com/pkg/errors"
 	"math/rand"
 )

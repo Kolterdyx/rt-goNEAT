@@ -2,7 +2,7 @@ package genetics
 
 import (
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
 	"io"
 	"sort"
 )

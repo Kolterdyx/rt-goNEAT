@@ -3,7 +3,7 @@ package genetics
 import (
 	"bytes"
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
 )
 
 // Organisms represents a list of organisms

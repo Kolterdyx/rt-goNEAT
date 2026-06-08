@@ -4,7 +4,7 @@ package network
 import (
 	"errors"
 	"fmt"
-	neatmath "github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	neatmath "github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
 	"math"
 )
 

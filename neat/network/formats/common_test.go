@@ -2,8 +2,8 @@ package formats
 
 import (
 	"errors"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
 )
 
 const alwaysErrorText = "always be failing"

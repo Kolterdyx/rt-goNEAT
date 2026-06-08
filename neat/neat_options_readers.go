@@ -2,7 +2,7 @@ package neat
 
 import (
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
 	"gopkg.in/yaml.v3"

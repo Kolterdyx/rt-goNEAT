@@ -5,7 +5,7 @@ package neat
 import (
 	"context"
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
 	"github.com/pkg/errors"
 )
 

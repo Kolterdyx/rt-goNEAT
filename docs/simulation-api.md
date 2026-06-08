@@ -3,7 +3,7 @@
 The `alife.Simulation` struct is the primary entry point for all ALife interactions. It wraps a `genetics.Population` and provides a thread-safe, event-driven interface.
 
 ```go
-import "github.com/Kolterdyx/rt-goNEAT/v4/alife"
+import "github.com/Kolterdyx/rt-goNEAT/v1/alife"
 ```
 
 ---

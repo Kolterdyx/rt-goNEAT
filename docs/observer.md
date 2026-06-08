@@ -3,7 +3,7 @@
 The `alife.Observer` interface lets you react to organism and species lifecycle events without polling the organism list every tick.
 
 ```go
-import "github.com/Kolterdyx/rt-goNEAT/v4/alife"
+import "github.com/Kolterdyx/rt-goNEAT/v1/alife"
 ```
 
 ---

@@ -1,8 +1,8 @@
 package genetics
 
 import (
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/network"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/network"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"

@@ -2,7 +2,7 @@ package network
 
 import (
 	"fmt"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
 )
 
 // Link is a connection from one node to another with an associated weight.

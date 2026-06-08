@@ -4,7 +4,7 @@ import (
 	"context"
 	"math/rand"
 
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
 )
 
 // CreateMutatedOffspring creates a new organism by duplicating parent's genome and applying

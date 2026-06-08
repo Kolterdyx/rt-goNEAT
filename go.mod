@@ -1,4 +1,4 @@
-module github.com/Kolterdyx/rt-goNEAT/v4
+module github.com/Kolterdyx/rt-goNEAT/v1
 
 go 1.25.0
 

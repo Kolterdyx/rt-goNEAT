@@ -26,10 +26,10 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/Kolterdyx/rt-goNEAT/v4/alife"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat"
-	"github.com/Kolterdyx/rt-goNEAT/v4/neat/genetics"
-	neatmath "github.com/Kolterdyx/rt-goNEAT/v4/neat/math"
+	"github.com/Kolterdyx/rt-goNEAT/v1/alife"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat"
+	"github.com/Kolterdyx/rt-goNEAT/v1/neat/genetics"
+	neatmath "github.com/Kolterdyx/rt-goNEAT/v1/neat/math"
 )
 
 // ── Organism state ──────────────────────────────────────────────────────────
